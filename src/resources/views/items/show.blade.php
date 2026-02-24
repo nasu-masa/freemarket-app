@@ -174,7 +174,11 @@
                             c-button
                             c-button--sm
                             c-button--primary">
-                        コメントを送信する
+                            @auth
+                            コメントを送信する
+                            @else
+                            ログインしてコメントする
+                            @endauth
                     </button>
 
                 </div>
