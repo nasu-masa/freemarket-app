@@ -189,7 +189,7 @@ src/
     └── Feature/                # 機能テスト
 ```
 
-# ◎ 画面遷移 × コントローラー 一覧
+# ◎ ルート・コントローラー 一覧 (Controller)
 
 | 画面名称               | パス                          | メソッド | コントローラー       | アクション   | 認証 | 説明                                                 |
 | ---------------------- | ----------------------------- | -------- | -------------------- | ------------ | ---- | ---------------------------------------------------- |
@@ -325,7 +325,7 @@ src/
 
 ```jsx
 
-<h3>◆ ER図（Entity Relationship Diagram）</h3> <img src="https://raw.githubusercontent.com/nasu-masa/freemarket-app/main/docs/er.png" width="600">
+![ER図](docs/er.jpg)
 
 ```
 
@@ -347,7 +347,7 @@ ER図では以下のエンティティを定義しています：
 
 ```jsx
 
-<h3>◆ テーブル仕様書</h3> <img src="https://raw.githubusercontent.com/nasu-masa/freemarket-app/main/docs/table_spec.png" width="600">
+![テーブル仕様書](docs/table_spec.jpg)
 
 ```
 
