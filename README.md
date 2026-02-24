@@ -42,24 +42,35 @@ php artisan migrate
 php artisan db:seed
 
 php artisan storage:link
+```
 
-# ここまでで「開発環境」が完成
-# ------------------------------------
-# ここから「テスト環境」を作る
+##　◆テスト環境のセットアップ
 
-cp .env .env.testing
+bash
+
+```jsx
 php artisan key:generate --env=testing
 ```
+
+※ env.testing はすでにリポジトリに含まれています。
+DB 接続情報などは 各自のローカル環境に合わせて変更してください。
+Stripe / AWS / Pusher などの秘密情報は 空欄のままで OK。
+
+##　◆Stripe のセットアップ
 
 ※本アプリでは、商品購入時の決済に **Stripe** を使用しています。
 
 ### ◆ インストール
+
+bash
 
 ```jsx
 composer require stripe/stripe-php
 ```
 
 ### ◆ Stripe の環境変数（.env）
+
+bash
 
 ```jsx
 STRIPE_KEY = your_stripe_public_key;
@@ -76,6 +87,52 @@ STRIPE_SECRET = your_stripe_secret_key;
 | ユーザー登録          | http://localhost/register |
 | phpMyAdmin            | http://localhost:8080/    |
 | MailHog（メール確認） | http://localhost:8025/    |
+
+
+# ◎ 🗂 テーブル仕様書 & ER図
+
+本アプリケーションは、coachtech が提示する仕様書（US001〜US009）に基づき
+
+データベース設計を行っています。
+
+以下に **ER図** と **テーブル仕様書** を掲載します。
+
+---
+
+## ◆ ER図（Entity Relationship Diagram）
+
+![ER図](docs/er.jpg)
+
+ER図では以下のエンティティを定義しています：
+
+- users
+- items
+- item_images
+- categories
+- category_item（中間テーブル）
+- comments
+- purchases
+- addresses
+- my_list_items
+
+---
+
+## ◆ テーブル仕様書
+
+![テーブル仕様書](docs/table_spec.jpg)
+
+テーブル仕様書では以下の内容を定義しています：
+
+- カラム名
+- データ型
+- NULL 許可
+- デフォルト値
+- 外部キー制約
+- カーディナリティ（1対多、多対多 など）
+
+本アプリのマイグレーションファイルは、
+
+このテーブル仕様書と完全に一致するように実装しています。
 
 # ◎ 🧩 使用技術（実行環境）
 
@@ -311,50 +368,15 @@ src/
 - 商品情報の登録（カテゴリ複数選択・状態・名前・ブランド・説明・価格）
 - 商品画像アップロード（storage 保存）
 
-# ◎ 🗂 テーブル仕様書 & ER図
+# ◎ 💡 工夫した点
 
-本アプリケーションは、coachtech が提示する仕様書（US001〜US009）に基づき
-
-データベース設計を行っています。
-
-以下に **ER図** と **テーブル仕様書** を掲載します。
-
----
-
-## ◆ ER図（Entity Relationship Diagram）
-
-![ER図](docs/er.jpg)
-
-ER図では以下のエンティティを定義しています：
-
-- users
-- items
-- item_images
-- categories
-- category_item（中間テーブル）
-- comments
-- purchases
-- addresses
-- my_list_items
-
----
-
-## ◆ テーブル仕様書
-
-![テーブル仕様書](docs/table_spec.jpg)
-
-テーブル仕様書では以下の内容を定義しています：
-
-- カラム名
-- データ型
-- NULL 許可
-- デフォルト値
-- 外部キー制約
-- カーディナリティ（1対多、多対多 など）
-
-本アプリのマイグレーションファイルは、
-
-このテーブル仕様書と完全に一致するように実装しています。
+- Fortify を用いた認証機能のカスタマイズ
+- メール認証導線の改善
+- 商品画像の表示調整（object-fit: contain）
+- UI の統一感を意識した Blade 構成
+- 共通CSSの統合によるスタイル管理の最適化
+- 検索フォームの UI 改善
+  - 世界的に標準化されている「虫眼鏡アイコン」を採用
 
 # ◎ 💳 決済サービス（Stripe）
 
@@ -365,16 +387,6 @@ ER図では以下のエンティティを定義しています：
 - 商品詳細ページから「購入する」をクリック
 - Stripe Checkout にリダイレクト
 - 決済完了後、トップページへ遷移
-
-# ◎ 💡 工夫した点
-
-- Fortify を用いた認証機能のカスタマイズ
-- メール認証導線の改善
-- 商品画像の表示調整（object-fit: contain）
-- UI の統一感を意識した Blade 構成
-- 共通CSSの統合によるスタイル管理の最適化
-- 検索フォームの UI 改善
-  - 世界的に標準化されている「虫眼鏡アイコン」を採用
 
 # ◎ 📝 補完した仕様
 
