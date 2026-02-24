@@ -168,19 +168,23 @@
                 </div>
 
                 <div class="c-button__wrapper">
-
+                    @auth
                     <button type="submit"
                         class="
                             c-button
                             c-button--sm
                             c-button--primary">
-                            @auth
-                            コメントを送信する
-                            @else
-                            ログインしてコメントする
-                            @endauth
+                        コメントを送信する
                     </button>
-
+                    @else
+                    <button type="submit"
+                        class="
+                            c-button
+                            c-button--sm
+                            c-button--secondary">
+                        ログインしてコメントする
+                    </button>
+                    @endauth
                 </div>
             </form>
         </div>

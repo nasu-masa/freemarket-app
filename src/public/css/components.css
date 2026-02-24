@@ -216,6 +216,17 @@
     background-color: #F04A4A;
 }
 
+.c-button--secondary {
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    background: #fff;
+    cursor: pointer;
+}
+
+.c-button--secondary:hover {
+    opacity: 0.5;
+}
+
 .c-button--sold-out {
     background-color: #ccc;
 }
