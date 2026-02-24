@@ -325,7 +325,7 @@ src/
 
 ```jsx
 
-![ER図](docs/er.png)
+<h3>◆ ER図（Entity Relationship Diagram）</h3> <img src="https://raw.githubusercontent.com/nasu-masa/freemarket-app/main/docs/er.png" width="600">
 
 ```
 
@@ -347,7 +347,7 @@ ER図では以下のエンティティを定義しています：
 
 ```jsx
 
-![テーブル仕様書](docs/table_spec.png)
+<h3>◆ テーブル仕様書</h3> <img src="https://raw.githubusercontent.com/nasu-masa/freemarket-app/main/docs/table_spec.png" width="600">
 
 ```
 
