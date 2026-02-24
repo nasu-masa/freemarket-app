@@ -315,15 +315,52 @@ src/
 
 # ◎ 🗂 テーブル仕様書 & ER図
 
-md
+本アプリケーションは、coachtech が提示する仕様書（US001〜US009）に基づき
 
-`![ER図](docs/er.png)`
+データベース設計を行っています。
 
-md
+以下に **ER図** と **テーブル仕様書** を掲載します。
+
+---
+
+## ◆ ER図（Entity Relationship Diagram）
 
 ```jsx
-![テーブル仕様書](docs / table_spec.png);
+![ER図](docs/er.png)
 ```
+
+ER図では以下のエンティティを定義しています：
+
+- users
+- items
+- item_images
+- categories
+- category_item（中間テーブル）
+- comments
+- purchases
+- addresses
+- my_list_items
+
+---
+
+## ◆ テーブル仕様書
+
+```jsx
+![テーブル仕様書](docs/table_spec.png)
+```
+
+テーブル仕様書では以下の内容を定義しています：
+
+- カラム名
+- データ型
+- NULL 許可
+- デフォルト値
+- 外部キー制約
+- カーディナリティ（1対多、多対多 など）
+
+本アプリのマイグレーションファイルは、
+
+このテーブル仕様書と完全に一致するように実装しています。
 
 # ◎ 💳 決済サービス（Stripe）
 
