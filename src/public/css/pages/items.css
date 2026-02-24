@@ -1,0 +1,257 @@
+/* ============================
+    Item Detail Page:layout
+============================ */
+.p-item-detail {
+    max-width: 1380px;
+    height: 1704px;
+    margin: 96px auto;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* ============================
+    Image Block
+============================ */
+.p-item-detail__image-container,
+.p-item-detail__content {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.p-item-detail__image-container {
+    position: sticky;
+    top: 0;
+    padding: 36px 45px;
+}
+
+.p-item-detail__image-card {
+    background: #000;
+}
+
+.p-item-detail__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
+.p-item-detail__image-card.is-sold::after {
+    font-size: 64px;
+}
+
+/* ============================
+    Content Area
+============================ */
+.p-item-detail__content {
+    padding-left: 65px;
+    padding-right: 55px;
+}
+
+/* ============================
+    Basic Information
+============================ */
+.p-item-detail__basic-title {
+    margin: 4px 0;
+    font-size: 45px;
+}
+
+.p-item-detail__basic-brand {
+    height: 20px;
+    margin: 0;
+    font-size: 20px;
+}
+
+.p-item-detail__basic-price,
+.p-item-detail__basic-price-tax {
+    font-size: 30px;
+}
+
+.p-item-detail__basic-price-value {
+    font-size: 45px;
+}
+
+/* ============================
+    Action Icon Buttons
+============================ */
+.p-item-detail__actions {
+    width: 144px;
+    margin-left: 40px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-item-detail__icon-button {
+    display: block;
+    min-height: 40px;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Like Button */
+.p-item-detail__like-button {
+    min-width: 45px;
+    background-image: url('/assets/ハートロゴ_デフォルト.png');
+    transition: transform 0.15s ease-out;
+}
+
+.p-item-detail__like-button.is-liked {
+    background-image: url('/assets/ハートロゴ_ピンク.png');
+    animation: pop 0.25s ease-out;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.p-item-detail__stock-button {
+    min-width: 40px;
+    background-image: url('/assets/ふきだしロゴ.png');
+}
+
+.p-item-detail__count {
+    display: block;
+    text-align: center;
+}
+
+/* ============================
+    Section Titles
+============================ */
+.p-item-detail__description-title,
+.p-item-detail__info-title,
+.p-item-detail__comments-title {
+    font-size: 36px;
+}
+
+/* ============================
+    Description Section
+============================ */
+.p-item-detail__description-title {
+    margin-top: 32px;
+    margin-bottom: 10px;
+}
+
+.p-item-detail__description-text {
+    padding: 40px 0;
+    font-size: 24px;
+}
+
+/* ============================
+    Product Info Section
+============================ */
+.p-item-detail__info-title {
+    margin: 23px 0;
+}
+
+.p-item-detail__info-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.p-item-detail__info-label {
+    margin-right: 64px;
+    font-size: 24px;
+}
+
+.p-item-detail__info-value {
+    margin-right: 24px;
+    font-size: 20px;
+}
+
+.p-item-detail__category {
+    min-width: 120px;
+    height: 30px;
+    padding: 0 16px;
+    background-color: #d9d9d9;
+    border-radius: 15px;
+}
+
+.p-item-detail__condition {
+    padding: 0 16px;
+}
+
+/* ============================
+    Comments Section
+============================ */
+.p-item-detail__comments-title {
+    color: #5F5F5F;
+}
+
+.p-item-detail__comments-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.p-item-detail__comments-user-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    background: #d9d9d9;
+    border-radius: 50%;
+}
+
+.p-item-detail__comments-user-name {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.p-item-detail__comments-list {
+    min-height: 70px;
+    padding: 20px 14px;
+    background-color: #e5e5e5;
+    border-radius: 5px;
+}
+
+.p-item-detail__comments-text {
+    font-size: 20px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.p-item-detail__comment-label {
+    display: block;
+    padding: 5px 0;
+    font-size: 28px;
+}
+
+.p-item-detail__comment-input {
+    display: block;
+    width: 100%;
+    min-height: 246px;
+    padding: 12px;
+    font-size: 16px;
+    border-color: #5F5F5F;
+    border-radius: 5px;
+}
+
+/* ============================
+    Error
+============================ */
+.p-error {
+    min-height: 48px;
+    padding-top: 8px;
+}
+
+.p-error__text {
+    color: #e53935;
+    font-size: 24px;
+    font-weight: bold;
+}

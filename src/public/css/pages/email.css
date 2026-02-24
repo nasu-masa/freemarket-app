@@ -1,0 +1,37 @@
+/* ================================
+    Email
+================================ */
+.p-email {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.p-email__text,
+.p-email__button {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.p-email__text {
+    margin: 240px 0 0;
+}
+
+
+.p-email__button {
+    margin: 56px auto;
+    width: 257px;
+}
+
+.p-email__button--submit {
+    width: 100%;
+    height: 69px;
+    color: #000;
+    background-color: #d9d9d9;
+    border: 2px solid #000;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.p-email__button--submit:hover {
+    background-color: #b9b9b9;
+}

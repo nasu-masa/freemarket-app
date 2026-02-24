@@ -1,0 +1,154 @@
+/* ===========================
+    Purchase Page: Layout
+=========================== */
+.p-purchase__form {
+    display: flex;
+    justify-content: space-between;
+    margin: 92px 80px;
+    padding-right: 5px;
+}
+
+.p-purchase__main {
+    width: 805px;
+    margin-right: 100px;
+}
+
+/* ===========================
+    Product Information
+=========================== */
+.p-purchase__item {
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.p-purchase__item-image {
+    width: 178px;
+    height: 178px;
+    margin-right: 56px;
+    object-fit: cover;
+}
+
+.p-purchase__item-name {
+    margin: 0 0 16px 0;
+    font-size: 30px;
+    line-height: 0.95;
+}
+
+.p-purchase__item-price {
+    margin: 0;
+    font-size: 24px;
+}
+
+.p-purchase__item-price--value {
+    font-size: 30px;
+}
+
+/* ===========================
+    Payment & Shipping Sections
+=========================== */
+.c-section--purchase {
+    padding: 24px 36px 0;
+}
+
+.c-select--purchase {
+    width: 265px;
+    margin-left: 60px;
+}
+
+.p-purchase__section-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ===========================
+    Shipping Address Display
+=========================== */
+.p-purchase__address-edit {
+    height: 30px;
+    font-size: 20px;
+    color: #0073cc;
+    text-decoration: none;
+}
+
+.p-purchase__address {
+    margin-left: 60px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.p-purchase__address-postal {
+    margin: 0 0 8px 0;
+}
+
+.p-purchase__address-detail {
+    margin: 0;
+}
+
+.p-address-register {
+    color: #0073cc;
+    font-size: var(--font-xs);
+}
+
+.p-purchase__address-edit:hover,
+.p-address-register:hover {
+    color: #004577;
+}
+
+/* ===========================
+    Error Messages
+=========================== */
+.p-error {
+    min-height: 56px;
+}
+
+.p-error__text {
+    color: #e53935;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+/* ===========================
+    Purchase Summary
+=========================== */
+.p-purchase__summary {
+    width: 440px;
+}
+
+.p-purchase-checkout__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.p-purchase-checkout__table-row {
+    height: 115px;
+    border: 1px solid #000;
+}
+
+.p-purchase-checkout__table-title {
+    font-weight: normal;
+}
+
+.p-purchase-checkout__table-title,
+.p-purchase-checkout__table-value,
+.p-purchase-checkout__table-price {
+    width: 50%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.p-purchase-checkout__table-value {
+    font-size: 24px;
+}
+
+/* ===========================
+    Address Edit Page
+=========================== */
+.c-card__title {
+    margin-bottom: 96px;
+}
+
+.p-input-area {
+    margin-bottom: 112px;
+}
