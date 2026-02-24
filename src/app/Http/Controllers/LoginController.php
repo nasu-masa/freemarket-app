@@ -34,6 +34,8 @@ class LoginController extends Controller
 
     public function logout()
     {
+        session()->forget('keyword');
+
         Auth::logout();
 
         return redirect('/');
