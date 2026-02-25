@@ -42,13 +42,14 @@
     padding: 0 14px;
 }
 
+.l-header__logo-link:hover {
+    transform: scale(1.01);
+}
+
 .l-header__logo {
     margin-right: 5px;
 }
 
-.l-header__logo:hover {
-    transform: scale(1.01);
-}
 
 /* ================================
     Components (C)
