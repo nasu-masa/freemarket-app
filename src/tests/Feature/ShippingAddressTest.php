@@ -35,7 +35,9 @@ class ShippingAddressTest extends TestCase
 
     public function test_address_is_reflected_in_purchase_page()
     {
-        [$item] = $this->prepareUserWithAddress();
+        [$user, $item] = $this->prepareUserWithAddress();
+
+        $this->actingAs($user);
 
         $response = $this->get(route('purchase.checkout', ['item_id' => $item->id]));
         $response->assertStatus(200);
