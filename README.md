@@ -34,6 +34,8 @@ docker-compose exec php bash
 
 composer install
 
+code .
+
 cp .env.example .env  ※環境変数適宣変更
 
 php artisan key:generate

@@ -26,14 +26,18 @@
 
 
     @if (session('success'))
-    <div class="c-flash c-flash--success">
-        {{ session('success') }}
+    <div class="c-flash">
+        <span class="c-flash__inner c-flash--success">
+            {{ session('success') }}
+        </span>
     </div>
     @endif
 
     @if (session('error'))
-    <div class="c-flash c-flash--error">
-        {{ session('error') }}
+    <div class="c-flash">
+        <span class="c-flash__inner c-flash--error">
+            {{ session('error') }}
+        </span>
     </div>
     @endif
 
