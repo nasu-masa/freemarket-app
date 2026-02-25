@@ -16,6 +16,9 @@ class CreateAddressesTable extends Migration
             $table->string('address', 100);
             $table->string('building')->nullable();
             $table->timestamps();
+
+            $table->unique('user_id');
+            $table->unique('purchase_id');
         });
     }
 
