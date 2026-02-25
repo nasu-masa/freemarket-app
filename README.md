@@ -48,10 +48,47 @@ php artisan storage:link
 
 ##　◆テスト環境のセットアップ
 
+1. テスト用アプリキーの生成
 bash
-
 ```jsx
 php artisan key:generate --env=testing
+```
+※ .env.testing はリポジトリに含まれています。
+DB 接続情報（DB_HOST / DB_DATABASE / DB_USERNAME / DB_PASSWORD）は、各自のローカル環境に合わせて変更してください。
+Stripe / AWS / Pusher などの秘密情報は空欄のままで問題ありません。
+
+2. テスト用データベースの作成（重要）
+Laravel のテストは .env.testing の設定を使用します。
+.env.testing に記載されている DB 名（例：demo_test）のデータベースを 事前に作成する必要があります。
+
+Docker を使用している場合：
+
+bash
+```jsx
+docker exec -it <mysqlコンテナ名> bash
+mysql -u root -p
+CREATE DATABASE demo_test;
+```
+※ <mysqlコンテナ名> は docker ps で確認できます。
+
+ローカル MySQL を使う場合：
+
+bash
+```jsx
+mysql -u root -p
+CREATE DATABASE demo_test;
+```
+3. テスト用マイグレーションの実行
+テスト DB を作成したら、テーブルを作成します。
+
+bash
+```jsx
+php artisan migrate:fresh --env=testing
+```
+4. テストの実行
+bash
+```jsx
+php artisan test
 ```
 
 ※ env.testing はすでにリポジトリに含まれています。

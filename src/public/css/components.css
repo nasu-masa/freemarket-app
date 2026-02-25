@@ -462,7 +462,7 @@
 .c-section__input {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 15px;
     margin-left: 4px;
 }
 
