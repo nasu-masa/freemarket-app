@@ -42,20 +42,26 @@ class PurchaseController extends Controller
             abort(403, 'この商品は購入できません');
         }
 
-        $payment = $request->payment;
+        // 住所変更があればプロフィール住所を更新
+        auth()->user()->address->update([
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building, ]);
+
+        $payment_method = $request->payment_method;
 
         // カード決済
-        if ($payment === 'card') {
+        if ($payment_method === 'card') {
             return $this->payByCard($item, app(StripeService::class));
         }
 
         // コンビニ決済
-        if ($payment === 'convenience') {
+        if ($payment_method === 'convenience') {
             return $this->payByConvenience($item);
         }
 
         return redirect()
-            ->route('purchase>checkout')
+            ->route('purchase.checkout', ['item_id' => $item_id])
             ->with('error', '不正な支払い方法です');
     }
 
@@ -76,6 +82,7 @@ class PurchaseController extends Controller
         Purchase::create([
             'user_id' => auth()->id(),
             'item_id' => $item->id,
+            'payment_method' => 'convenience',
             'purchased_at' => now(),
         ]);
 
@@ -94,6 +101,7 @@ class PurchaseController extends Controller
         Purchase::create([
             'user_id' => auth()->id(),
             'item_id' => $item_id,
+            'payment_method' => 'card',
             'purchased_at' => now(),
         ]);
 
@@ -104,7 +112,6 @@ class PurchaseController extends Controller
 
     public function cancel($item_id)
     {
-        // キャンセル時は購入画面へ戻す
         return redirect()
             ->route('purchase.checkout', ['item_id' => $item_id])
             ->with('error', '購入手続きが中断されました');

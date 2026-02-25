@@ -11,9 +11,10 @@ class PurchaseFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
-            'item_id' => Item::factory(),
-            'purchased_at' => now()
+            'user_id'        => User::factory(),
+            'item_id'        => Item::factory(),
+            'payment_method' => 'card',
+            'purchased_at'   => now()
         ];
     }
 }

@@ -9,7 +9,7 @@
 
         // old がある場合は UI を復元
         if (oldPayment) {
-            var target = document.querySelector('input[name="payment"][value="' + oldPayment + '"]');
+            var target = document.querySelector('input[name="payment_method"][value="' + oldPayment + '"]');
 
             if (target) {
                 target.checked = true;

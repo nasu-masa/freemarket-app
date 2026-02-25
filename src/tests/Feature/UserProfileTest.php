@@ -31,7 +31,6 @@ class UserProfileTest extends TestCase
         // 購入済みの商品
         $purchasedItems = Purchase::factory()
             ->count(2)
-            ->for(Item::factory())
             ->create([
                 'user_id' => $user->id,
             ]);
