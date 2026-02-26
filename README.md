@@ -247,7 +247,7 @@ volumes:
 
 
 
-# ◎ 📁 ディレクトリ構造（主要部分のみ）
+# ◆ 📁 ディレクトリ構造（主要部分のみ）
 
 ```jsx
 src/
@@ -292,36 +292,213 @@ src/
 ```
 
 
+## ◆ ルート 一覧 (Route)
 
-# ◎ ルート・コントローラー 一覧 (Controller)
+----------------------------------------
+■ 画面名称：商品一覧画面（トップ画面）
+パス：/
+メソッド：GET
+コントローラー：ItemController
+アクション：index
+認証必須：不要
+説明：商品一覧ページ
+----------------------------------------
 
-| 画面名称               | パス                          | メソッド | コントローラー       | アクション   | 認証 | 説明                                                 |
-| ---------------------- | ----------------------------- | -------- | -------------------- | ------------ | ---- | ---------------------------------------------------- |
-| 商品一覧（トップ）     | `/`                           | GET      | ItemController       | index        | 不要 | 商品一覧表示                                         |
-| 商品一覧（マイリスト） | `/?tab=mylist`                | GET      | ItemController       | index        | 必須 | マイリストタブ表示                                   |
-| 会員登録画面           | `/register`                   | GET      | RegisterController   | show         | 不要 | 新規登録フォーム表示（処理は Fortify が担当）        |
-| 会員登録処理           | `/register`                   | POST     | Fortify（内部処理）  | create       | 不要 | 新規登録処理（Controller ではなく Fortify が実行）   |
-| ログイン画面           | `/login`                      | GET      | LoginController      | show         | 不要 | ログインフォーム表示（処理は Fortify が担当）        |
-| ログイン処理           | `/login`                      | POST     | Fortify（内部処理）  | authenticate | 不要 | ログイン処理（Controller ではなく Fortify が実行）   |
-| ログアウト             | `/logout`                     | POST     | Fortify（内部処理）  | logout       | 必須 | ログアウト処理（Controller ではなく Fortify が実行） |
-| 商品詳細               | `/item/{item_id}`             | GET      | ItemController       | show         | 不要 | 商品詳細                                             |
-| いいね追加             | `/item/{item_id}/like`        | POST     | MyListItemController | store        | 必須 | マイリスト追加                                       |
-| コメント投稿           | `/item/{item_id}/comments`    | POST     | CommentController    | store        | 必須 | コメント送信                                         |
-| 購入確認               | `/purchase/{item_id}`         | GET      | PurchaseController   | create       | 必須 | 購入確認画面                                         |
-| 購入処理               | `/purchase/{item_id}`         | POST     | PurchaseController   | store        | 必須 | 購入処理                                             |
-| 住所変更               | `/purchase/address/{item_id}` | GET      | AddressController    | editAddress  | 必須 | 購入時の住所変更                                     |
-| 住所変更処理           | `/purchase/address/{item_id}` | PUT      | AddressController    | updateAdress | 必須 | 住所変更処理                                         |
-| 出品画面               | `/sell`                       | GET      | ItemController       | create       | 必須 | 出品フォーム                                         |
-| 出品処理               | `/sell`                       | POST     | ItemController       | store        | 必須 | 出品処理                                             |
-| マイページ             | `/mypage`                     | GET      | ProfileController    | index        | 必須 | マイページ                                           |
-| プロフィール編集       | `/mypage/profile`             | GET      | ProfileController    | edit         | 必須 | プロフィール編集                                     |
-| プロフィール更新       | `/mypage/profile`             | PUT      | ProfileController    | update       | 必須 | プロフィール更新                                     |
-| 購入履歴タブ           | `/mypage?page=buy`            | GET      | ProfileController    | index        | 必須 | 購入履歴                                             |
-| 出品履歴タブ           | `/mypage?page=sell`           | GET      | ProfileController    | index        | 必須 | 出品履歴                                             |
+■ 画面名称：商品一覧画面（トップ画面）_マイリスト
+パス：/?tab=mylist
+メソッド：GET
+コントローラー：ItemController
+アクション：index
+認証必須：必須
+説明：マイリストタブ表示
+----------------------------------------
+
+■ 画面名称：会員登録画面
+パス：/register
+メソッド：GET
+コントローラー：RegisterController
+アクション：show
+認証必須：不要
+説明：新規登録フォーム
+----------------------------------------
+
+■ 画面名称：会員登録処理
+パス：/register
+メソッド：POST
+コントローラー：RegisterController
+アクション：register
+認証必須：不要
+説明：新規登録画面表示のみ（処理は Fortify）
+----------------------------------------
+
+■ 画面名称：ログイン画面
+パス：/login
+メソッド：GET
+コントローラー：LoginController
+アクション：show
+認証必須：不要
+説明：ログインフォーム
+----------------------------------------
+
+■ 画面名称：ログイン処理
+パス：/login
+メソッド：POST
+コントローラー：LoginController
+アクション：login
+認証必須：不要
+説明：ログイン画面遷移のみ（処理は Fortify）
+----------------------------------------
+
+■ 画面名称：ログアウト
+パス：/logout
+メソッド：POST
+コントローラー：LoginController
+アクション：logout
+認証必須：必須
+説明：ログアウト処理（Fortify）
+----------------------------------------
+
+■ 画面名称：商品詳細画面
+パス：/item/{item_id}
+メソッド：GET
+コントローラー：ItemController
+アクション：show
+認証必須：不要
+説明：商品詳細
+----------------------------------------
+
+■ 画面名称：商品詳細画面_いいね追加
+パス：/item/{item_id}/like
+メソッド：POST
+コントローラー：MyListItemController
+アクション：store
+認証必須：必須
+説明：マイリスト(いいね)追加処理
+----------------------------------------
+
+■ 画面名称：商品詳細画面_コメント投稿
+パス：/item/{item_id}/comments
+メソッド：POST
+コントローラー：CommentController
+アクション：store
+認証必須：必須
+説明：コメント送信処理
+----------------------------------------
+
+■ 画面名称：商品購入画面
+パス：/purchase/{item_id}
+メソッド：GET
+コントローラー：PurchaseController
+アクション：create
+認証必須：必須
+説明：購入確認画面
+----------------------------------------
+
+■ 画面名称：商品購入処理
+パス：/purchase/{item_id}
+メソッド：POST
+コントローラー：PurchaseController
+アクション：store
+認証必須：必須
+説明：購入処理
+----------------------------------------
+
+■ 画面名称：住所変更ページ
+パス：/purchase/address/{item_id}
+メソッド：GET
+コントローラー：AddressController
+アクション：editAddress
+認証必須：必須
+説明：購入時の住所変更
+----------------------------------------
+
+■ 画面名称：住所変更処理
+パス：/purchase/address/{item_id}
+メソッド：PUT
+コントローラー：AddressController
+アクション：updateAdress
+認証必須：必須
+説明：購入時の住所変更処理
+----------------------------------------
+
+■ 画面名称：商品出品画面
+パス：/sell
+メソッド：GET
+コントローラー：ItemController
+アクション：create
+認証必須：必須
+説明：出品フォーム
+----------------------------------------
+
+■ 画面名称：商品出品処理
+パス：/sell
+メソッド：POST
+コントローラー：ItemController
+アクション：store
+認証必須：必須
+説明：出品処理
+----------------------------------------
+
+■ 画面名称：プロフィール画面
+パス：/mypage
+メソッド：GET
+コントローラー：ProfileController
+アクション：index
+認証必須：必須
+説明：マイページ
+----------------------------------------
+
+■ 画面名称：プロフィール編集画面
+パス：/mypage/profile
+メソッド：GET
+コントローラー：ProfileController
+アクション：edit
+認証必須：必須
+説明：プロフィール編集
+----------------------------------------
+
+■ 画面名称：プロフィール更新処理
+パス：/mypage/profile
+メソッド：PUT
+コントローラー：ProfileController
+アクション：update
+認証必須：必須
+説明：プロフィール更新
+----------------------------------------
+
+■ 画面名称：プロフィール画面_購入した商品一覧
+パス：/mypage?page=buy
+メソッド：GET
+コントローラー：ProfileController
+アクション：index
+認証必須：必須
+説明：購入履歴タブ
+----------------------------------------
+
+■ 画面名称：プロフィール画面_出品した商品一覧
+パス：/mypage?page=sell
+メソッド：GET
+コントローラー：ProfileController
+アクション：index
+認証必須：必須
+説明：出品履歴タブ
+----------------------------------------
+
+## ◆　コントローラー 一覧（Controller）
+
+| コントローラーファイル名     | 説明                                                                 |
+| ---------------------------- | -------------------------------------------------------------------- |
+| ItemController.php           | 商品一覧・詳細・出品フォーム・出品処理を管理                         |
+| MyListItemController.php     | マイリスト（お気に入り）追加を管理                                   |
+| CommentController.php        | 商品へのコメント投稿を管理                                           |
+| PurchaseController.php       | 購入確認画面・購入処理を管理                                         |
+| AddressController.php        | 購入時の住所変更画面・住所更新処理を管理                             |
+| ProfileController.php        | マイページ、購入履歴・出品履歴、プロフィール編集・更新を管理         |
+| RegisterController.php       | 会員登録フォーム表示（処理は Fortify が担当）                        |
+| LoginController.php          | ログインフォーム表示（処理は Fortify が担当）                        |
 
 
-
-# ◎ モデル一覧（Model）
+## ◆ モデル 一覧（Model）
 
 | モデルファイル名 | 説明                                                                                 |
 | ---------------- | ------------------------------------------------------------------------------------ |
@@ -336,7 +513,7 @@ src/
 
 
 
-# ◎ ビュー一覧（Bladeファイル）
+## ◆ ビュー 一覧（Bladeファイル）
 
 | 画面名称                         | Bladeファイル名                 |
 | -------------------------------- | ------------------------------- |
@@ -353,7 +530,7 @@ src/
 
 
 
-# ◎ CSS ファイル一覧
+## ◆ CSS ファイル一覧
 
 | ファイル名         | 説明                                                 |
 | ------------------ | ---------------------------------------------------- |
@@ -368,7 +545,7 @@ src/
 
 
 
-# ◎ JavaScript ファイル一覧
+## ◆ JavaScript ファイル一覧
 
 | ファイル名               | 説明                                                   |
 | ------------------------ | ------------------------------------------------------ |
@@ -461,7 +638,3 @@ UI/UX に関わる重要な仕様が一部欠落していたため、
 # ◎ 📄 ライセンス
 
 このプロジェクトは学習目的で作成されています。
-
-
-
-以上になります。
