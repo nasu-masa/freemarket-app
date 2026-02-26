@@ -296,193 +296,194 @@ src/
 
 ----------------------------------------
 ■ 画面名称：商品一覧画面（トップ画面）
-パス：/
-メソッド：GET
-コントローラー：ItemController
-アクション：index
-認証必須：不要
-説明：商品一覧ページ
+- パス：/
+- メソッド：GET
+- コントローラー：ItemController
+- アクション：index
+- 認証必須：不要
+- 説明：商品一覧ページ
 ----------------------------------------
 
 ■ 画面名称：商品一覧画面（トップ画面）_マイリスト
-パス：/?tab=mylist
-メソッド：GET
-コントローラー：ItemController
-アクション：index
-認証必須：必須
-説明：マイリストタブ表示
+- パス：/?tab=mylist
+- メソッド：GET
+- コントローラー：ItemController
+- アクション：index
+- 認証必須：必須
+- 説明：マイリストタブ表示
 ----------------------------------------
 
 ■ 画面名称：会員登録画面
-パス：/register
-メソッド：GET
-コントローラー：RegisterController
-アクション：show
-認証必須：不要
-説明：新規登録フォーム
+- パス：/register
+- メソッド：GET
+- コントローラー：RegisterController
+- アクション：show
+- 認証必須：不要
+- 説明：新規登録フォーム
 ----------------------------------------
 
 ■ 画面名称：会員登録処理
-パス：/register
-メソッド：POST
-コントローラー：RegisterController
-アクション：register
-認証必須：不要
-説明：新規登録画面表示のみ（処理は Fortify）
+- パス：/register
+- メソッド：POST
+- コントローラー：RegisterController
+- アクション：register
+- 認証必須：不要
+- 説明：新規登録画面表示のみ（処理は Fortify）
 ----------------------------------------
 
 ■ 画面名称：ログイン画面
-パス：/login
-メソッド：GET
-コントローラー：LoginController
-アクション：show
-認証必須：不要
-説明：ログインフォーム
+- パス：/login
+- メソッド：GET
+- コントローラー：LoginController
+- アクション：show
+- 認証必須：不要
+- 説明：ログインフォーム
 ----------------------------------------
 
 ■ 画面名称：ログイン処理
-パス：/login
-メソッド：POST
-コントローラー：LoginController
-アクション：login
-認証必須：不要
-説明：ログイン画面遷移のみ（処理は Fortify）
+- パス：/login
+- メソッド：POST
+- コントローラー：LoginController
+- アクション：login
+- 認証必須：不要
+- 説明：ログイン画面遷移のみ（処理は Fortify）
 ----------------------------------------
 
 ■ 画面名称：ログアウト
-パス：/logout
-メソッド：POST
-コントローラー：LoginController
-アクション：logout
-認証必須：必須
-説明：ログアウト処理（Fortify）
+- パス：/logout
+- メソッド：POST
+- コントローラー：LoginController
+- アクション：logout
+- 認証必須：必須
+- 説明：ログアウト処理（Fortify）
 ----------------------------------------
 
 ■ 画面名称：商品詳細画面
-パス：/item/{item_id}
-メソッド：GET
-コントローラー：ItemController
-アクション：show
-認証必須：不要
-説明：商品詳細
+- パス：/item/{item_id}
+- メソッド：GET
+- コントローラー：ItemController
+- アクション：show
+- 認証必須：不要
+- 説明：商品詳細
 ----------------------------------------
 
 ■ 画面名称：商品詳細画面_いいね追加
-パス：/item/{item_id}/like
-メソッド：POST
-コントローラー：MyListItemController
-アクション：store
-認証必須：必須
-説明：マイリスト(いいね)追加処理
+- パス：/item/{item_id}/like
+- メソッド：POST
+- コントローラー：MyListItemController
+- アクション：store
+- 認証必須：必須
+- 説明：マイリスト(いいね)追加処理
 ----------------------------------------
 
 ■ 画面名称：商品詳細画面_コメント投稿
-パス：/item/{item_id}/comments
-メソッド：POST
-コントローラー：CommentController
-アクション：store
-認証必須：必須
-説明：コメント送信処理
+- パス：/item/{item_id}/comments
+- メソッド：POST
+- コントローラー：CommentController
+- アクション：store
+- 認証必須：必須
+- 説明：コメント送信処理
 ----------------------------------------
 
 ■ 画面名称：商品購入画面
-パス：/purchase/{item_id}
-メソッド：GET
-コントローラー：PurchaseController
-アクション：create
-認証必須：必須
-説明：購入確認画面
+- パス：/purchase/{item_id}
+- メソッド：GET
+- コントローラー：PurchaseController
+- アクション：create
+- 認証必須：必須
+- 説明：購入確認画面
 ----------------------------------------
 
 ■ 画面名称：商品購入処理
-パス：/purchase/{item_id}
-メソッド：POST
-コントローラー：PurchaseController
-アクション：store
-認証必須：必須
-説明：購入処理
+- パス：/purchase/{item_id}
+- メソッド：POST
+- コントローラー：PurchaseController
+- アクション：store
+- 認証必須：必須
+- 説明：購入処理
 ----------------------------------------
 
 ■ 画面名称：住所変更ページ
-パス：/purchase/address/{item_id}
-メソッド：GET
-コントローラー：AddressController
-アクション：editAddress
-認証必須：必須
-説明：購入時の住所変更
+- パス：/purchase/address/{item_id}
+- メソッド：GET
+- コントローラー：AddressController
+- アクション：editAddress
+- 認証必須：必須
+- 説明：購入時の住所変更
 ----------------------------------------
 
 ■ 画面名称：住所変更処理
-パス：/purchase/address/{item_id}
-メソッド：PUT
-コントローラー：AddressController
-アクション：updateAdress
-認証必須：必須
-説明：購入時の住所変更処理
+- パス：/purchase/address/{item_id}
+- メソッド：PUT
+- コントローラー：AddressController
+- アクション：updateAdress
+- 認証必須：必須
+- 説明：購入時の住所変更処理
 ----------------------------------------
 
 ■ 画面名称：商品出品画面
-パス：/sell
-メソッド：GET
-コントローラー：ItemController
-アクション：create
-認証必須：必須
-説明：出品フォーム
+- パス：/sell
+- メソッド：GET
+- コントローラー：ItemController
+- アクション：create
+- 認証必須：必須
+- 説明：出品フォーム
 ----------------------------------------
 
 ■ 画面名称：商品出品処理
-パス：/sell
-メソッド：POST
-コントローラー：ItemController
-アクション：store
-認証必須：必須
-説明：出品処理
+- パス：/sell
+- メソッド：POST
+- コントローラー：ItemController
+- アクション：store
+- 認証必須：必須
+- 説明：出品処理
 ----------------------------------------
 
 ■ 画面名称：プロフィール画面
-パス：/mypage
-メソッド：GET
-コントローラー：ProfileController
-アクション：index
-認証必須：必須
-説明：マイページ
+- パス：/mypage
+- メソッド：GET
+- コントローラー：ProfileController
+- アクション：index
+- 認証必須：必須
+- 説明：マイページ
 ----------------------------------------
 
 ■ 画面名称：プロフィール編集画面
-パス：/mypage/profile
-メソッド：GET
-コントローラー：ProfileController
-アクション：edit
-認証必須：必須
-説明：プロフィール編集
+- パス：/mypage/profile
+- メソッド：GET
+- コントローラー：ProfileController
+- アクション：edit
+- 認証必須：必須
+- 説明：プロフィール編集
 ----------------------------------------
 
 ■ 画面名称：プロフィール更新処理
-パス：/mypage/profile
-メソッド：PUT
-コントローラー：ProfileController
-アクション：update
-認証必須：必須
-説明：プロフィール更新
+- パス：/mypage/profile
+- メソッド：PUT
+- コントローラー：ProfileController
+- アクション：update
+- 認証必須：必須
+- 説明：プロフィール更新
 ----------------------------------------
 
 ■ 画面名称：プロフィール画面_購入した商品一覧
-パス：/mypage?page=buy
-メソッド：GET
-コントローラー：ProfileController
-アクション：index
-認証必須：必須
-説明：購入履歴タブ
+- パス：/mypage?page=buy
+- メソッド：GET
+- コントローラー：ProfileController
+- アクション：index
+- 認証必須：必須
+- 説明：購入履歴タブ
 ----------------------------------------
 
 ■ 画面名称：プロフィール画面_出品した商品一覧
-パス：/mypage?page=sell
-メソッド：GET
-コントローラー：ProfileController
-アクション：index
-認証必須：必須
-説明：出品履歴タブ
+- パス：/mypage?page=sell
+- メソッド：GET
+- コントローラー：ProfileController
+- アクション：index
+- 認証必須：必須
+- 説明：出品履歴タブ
 ----------------------------------------
+
 
 ## ◆　コントローラー 一覧（Controller）
 
