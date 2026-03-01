@@ -87,8 +87,6 @@ php artisan migrate:fresh --env=testing
 php artisan test --env=testing
 ```
 
-````
-
 DB 接続情報などは 各自のローカル環境に合わせて変更してください。
 Stripe / AWS / Pusher などの秘密情報は 空欄のままで OK。
 
@@ -177,7 +175,7 @@ ER図では以下のエンティティを定義しています：
 
 # ◆ 📁 ディレクトリ構造（主要部分のみ）
 
-```jsx
+```bash
 src/
 ├── app/
 │   ├── Actions/                # Fortify関連アクション
@@ -187,7 +185,7 @@ src/
 │   │   └── Requests/           # バリデーション
 │   ├── Models/                 # モデル
 │   ├── Notifications/          # メール通知
-│   ├── Policies/
+│   ├── Policies/               # アクセス制御（Policyクラス）
 │   ├── Providers/              # FortifyServiceProvider など
 │   └── Services/               # ビジネスロジック
 │
@@ -199,10 +197,10 @@ src/
 │   └── factories/              # テスト用データ
 │
 ├── public/
-│   ├── assets/
+│   ├── assets/                 #装飾用部品 (logoなど)
 │   ├── css/
 │   ├── js/
-│   └── products/               # 商品画像
+│   └── products/               # ダミー用商品画像
 │
 ├── resources/
 │   └── views/
