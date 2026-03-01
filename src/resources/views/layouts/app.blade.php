@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" class="u-scroll-stable">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -52,7 +52,7 @@
                     <li class="c-nav__item">
                         <form action="/logout" method="POST">
                             @csrf
-                            <button class="c-nav__link ">
+                            <button class="c-nav__link">
                                 ログアウト
                             </button>
                         </form>

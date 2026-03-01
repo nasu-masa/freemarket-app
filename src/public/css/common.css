@@ -32,6 +32,10 @@
     border-top: 2px solid #5F5F5F;
 }
 
+.l-button-wrapper {
+    display: flex;
+    width: 100%;
+}
 /* ================================
     Header Logo
 ================================ */
@@ -39,17 +43,15 @@
 .l-header__logo-link {
     display: flex;
     align-items: center;
+    height: 50px;
+    margin-right: 5px;
     padding: 0 14px;
 }
 
 .l-header__logo-link:hover {
-    transform: scale(1.01);
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
-
-.l-header__logo {
-    margin-right: 5px;
-}
-
 
 /* ================================
     Components (C)
@@ -115,7 +117,7 @@
 }
 
 .c-nav__link:hover {
-    background-color: #303030;
+    border: 1px solid #ccc;
 }
 
 .c-nav__link--button {

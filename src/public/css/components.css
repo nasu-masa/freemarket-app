@@ -155,9 +155,22 @@
     Error
 ================================ */
 
+.c-error--sm {
+    min-height: 32px;
+}
+
 .c-error {
     min-height: 40px;
     padding-top: 8px;
+}
+
+.c-error--lg {
+    min-height: 48px;
+    padding-top: 8px;
+}
+
+.c-error--xl {
+    min-height: 56px;
 }
 
 .c-error__text {
@@ -167,18 +180,13 @@
     line-height: 20px;
 }
 
-.c-error--category {
-    min-height: 32px;
+.c-error--xl .c-error__text {
+    font-size: var(--font-xs);
 }
 
 /* ================================
     Button
 ================================ */
-
-.c-button__wrapper {
-    display: flex;
-    width: 100%;
-}
 
 .c-button {
     flex: 1;
@@ -254,11 +262,6 @@
 /* ================================
     Profile
 ================================ */
-
-.c-page-header {
-    max-width: 1512px;
-    margin: 0 auto;
-}
 
 .c-profile {
     max-width: 1017px;

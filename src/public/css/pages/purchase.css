@@ -46,13 +46,8 @@
 /* ===========================
     Payment & Shipping Sections
 =========================== */
-.c-section--purchase {
+.p-purchase__section {
     padding: 24px 36px 0;
-}
-
-.c-select--purchase {
-    width: 265px;
-    margin-left: 60px;
 }
 
 .p-purchase__section-container {
@@ -60,6 +55,10 @@
     justify-content: space-between;
 }
 
+.p-purchase__select {
+    width: 265px;
+    margin-left: 60px;
+}
 /* ===========================
     Shipping Address Display
 =========================== */
@@ -95,20 +94,6 @@
 }
 
 /* ===========================
-    Error Messages
-=========================== */
-.p-error {
-    min-height: 56px;
-}
-
-.p-error__text {
-    color: #e53935;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 20px;
-}
-
-/* ===========================
     Purchase Summary
 =========================== */
 .p-purchase__summary {
@@ -117,6 +102,7 @@
 
 .p-purchase-checkout__table {
     width: 100%;
+    margin-bottom: 64px;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -145,10 +131,12 @@
 /* ===========================
     Address Edit Page
 =========================== */
-.c-card__title {
+
+.p-address__title {
+    margin-top: 48px;
     margin-bottom: 96px;
 }
 
-.p-input-area {
+.p-address__input-area {
     margin-bottom: 112px;
 }

@@ -30,7 +30,7 @@ class ItemSearchTest extends TestCase
         $response->assertDontSeeText('銅のじょうろ');
     }
 
-    public function test_search_keyword_is_preserved_in_mylist_tab()
+    public function test_search_keyword_is_preserved_in_my_list_tab()
     {
         $this->get('/?keyword=斧')
             ->assertSee('value="斧"', false);

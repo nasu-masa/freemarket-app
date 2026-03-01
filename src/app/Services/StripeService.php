@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\URL;
 use Stripe\StripeClient;
 use App\Models\Item;
 
@@ -34,7 +35,7 @@ class StripeService
                 ]
             ],
             'mode'        => 'payment',
-            'success_url' => route('purchase.success', ['item_id' => $item->id]),
+            'success_url' => URL::signedRoute('purchase.success', ['item_id' => $item->id]),
             'cancel_url'  => route('purchase.cancel', ['item_id' => $item->id]),
         ]);
     }

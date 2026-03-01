@@ -10,26 +10,20 @@
 
 ## ◆ リポジトリのクローン
 
-bash
-
-```jsx
+```bash
 git clone git@github.com:nasu-masa/freemarket-app.git
 cd freemarket-app
 ```
 
 ## ◆ Docker ビルド & 起動
 
-bash
-
-```jsx
+```bash
 docker-compose up -d --build
 ```
 
 ## ◆ Laravel セットアップ
 
-bash
-
-```jsx
+```bash
 docker-compose exec php bash
 
 composer install
@@ -46,16 +40,15 @@ php artisan db:seed
 php artisan storage:link
 ```
 
-##　◆テスト環境のセットアップ
+## ◆テスト環境のセットアップ
 
-1. テスト用アプリキーの生成
-   bash
+1. テスト用 `.env.testing` ファイルの作成とアプリキーの生成
 
-```jsx
+```bash
+cp .env .env.testing
 php artisan key:generate --env=testing
 ```
 
-※ .env.testing はリポジトリに含まれています。
 DB 接続情報（DB_HOST / DB_DATABASE / DB_USERNAME / DB_PASSWORD）は、各自のローカル環境に合わせて変更してください。
 Stripe / AWS / Pusher などの秘密情報は空欄のままで問題ありません。
 
@@ -65,42 +58,37 @@ Stripe / AWS / Pusher などの秘密情報は空欄のままで問題ありま�
 
 Docker を使用している場合：
 
-bash
-
-```jsx
+```bash
 docker exec -it <mysqlコンテナ名> bash
 mysql -u root -p
 CREATE DATABASE demo_test;
+SHOW DATABASES;
 ```
 
 ※ <mysqlコンテナ名> は docker ps で確認できます。
 
 ローカル MySQL を使う場合：
 
-bash
-
-```jsx
+```bash
 mysql -u root -p
 CREATE DATABASE demo_test;
+SHOW DATABASES;
 ```
 
 3. テスト用マイグレーションの実行
    テスト DB を作成したら、テーブルを作成します。
 
-bash
-
-```jsx
+```bash
 php artisan migrate:fresh --env=testing
 ```
 
 4. テストの実行
-   bash
-
-```jsx
-php artisan test
+```bash
+php artisan test --env=testing
 ```
 
-※ env.testing はすでにリポジトリに含まれています。
+````
+
 DB 接続情報などは 各自のローカル環境に合わせて変更してください。
 Stripe / AWS / Pusher などの秘密情報は 空欄のままで OK。
 
@@ -110,22 +98,17 @@ Stripe / AWS / Pusher などの秘密情報は 空欄のままで OK。
 
 ### ◆ インストール
 
-bash
-
-```jsx
+```bash
 composer require stripe/stripe-php
 ```
 
+````
 ### ◆ Stripe の環境変数（.env）
 
-bash
-
-```jsx
+```bash
 STRIPE_KEY = your_stripe_public_key;
 STRIPE_SECRET = your_stripe_secret_key;
 ```
-
-※ `.env.example` にもダミー値を記載しています。
 
 ## ◆ 開発環境 URL
 
@@ -139,7 +122,6 @@ STRIPE_SECRET = your_stripe_secret_key;
 # ◎ 🗂 テーブル仕様書 & ER図
 
 本アプリケーションは、coachtech が提示する仕様書（US001〜US009）に基づき
-
 データベース設計を行っています。
 
 以下に **ER図** と **テーブル仕様書** を掲載します。
@@ -191,63 +173,7 @@ ER図では以下のエンティティを定義しています：
 - **CSS**
 - **Laravel Fortify（認証）**
 
-# ◎ 🐳 docker-compose.yml（構成）
-
-yaml
-
-```jsx
-version: '3.8'
-
-services:
-    nginx:
-        image: nginx:1.21.1
-        ports:
-            - "80:80"
-        volumes:
-            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-            - ./src:/var/www/
-        depends_on:
-            - php
-
-    php:
-        build: ./docker/php
-        volumes:
-            - ./src:/var/www/
-
-    mysql:
-        image: mysql:8.0.32
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: laravel_db
-            MYSQL_USER: laravel_user
-            MYSQL_PASSWORD: laravel_pass
-        command:
-            mysqld --default-authentication-plugin=mysql_native_password
-        volumes:
-            - mysql-data:/var/lib/mysql
-            - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-
-    mailhog:
-        image: mailhog/mailhog
-        ports:
-            - "1025:1025"
-            - "8025:8025"
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        environment:
-            - PMA_ARBITRARY=1
-            - PMA_HOST=mysql
-            - PMA_USER=laravel_user
-            - PMA_PASSWORD=laravel_pass
-        depends_on:
-            - mysql
-        ports:
-            - 8080:80
-
-volumes:
-	mysql-data:
-```
+> ※ 各サービスの構成は `docker-compose.yml` を参照してください
 
 # ◆ 📁 ディレクトリ構造（主要部分のみ）
 
@@ -261,6 +187,7 @@ src/
 │   │   └── Requests/           # バリデーション
 │   ├── Models/                 # モデル
 │   ├── Notifications/          # メール通知
+│   ├── Policies/
 │   ├── Providers/              # FortifyServiceProvider など
 │   └── Services/               # ビジネスロジック
 │
@@ -443,9 +370,9 @@ src/
 ■ 画面名称：住所変更処理
 
 - パス：/purchase/address/{item_id}
-- メソッド：PUT
+- メソッド：POST
 - コントローラー：AddressController
-- アクション：updateAdress
+- アクション：storeAddress
 - 認証必須：必須
 - 説明：購入時の住所変更処理
 
@@ -498,9 +425,9 @@ src/
 ■ 画面名称：プロフィール更新処理
 
 - パス：/mypage/profile
-- メソッド：PUT
+- メソッド：POST
 - コントローラー：ProfileController
-- アクション：update
+- アクション：store
 - 認証必須：必須
 - 説明：プロフィール更新
 
@@ -550,8 +477,8 @@ src/
 | Category.php     | 商品カテゴリを管理                                                                   |
 | Comment.php      | 商品へのコメントを管理                                                               |
 | Item.php         | 出品された商品データ（タイトル・説明・価格・カテゴリ・ブランド・状態・出品者）を管理 |
-| ItemImage.php    | 商品画像を管理する                                                                   |
-| MylistItem.php   | ユーザーのお気に入り（マイリスト）を管理                                             |
+| ItemImage.php    | 商品画像を管理                                                                       |
+| MyListItem.php   | ユーザーのお気に入り（マイリスト）を管理                                             |
 | Purchase.php     | 購入情報（購入者・商品・購入日時・金額）を管理                                       |
 
 ## ◆ ビュー 一覧（Bladeファイル）
@@ -569,30 +496,10 @@ src/
 | プロフィール編集画面（設定画面） | mypage/profile_edit.blade.php   |
 | メール認証誘導画面               | auth/verify_email.blade.php     |
 
-## ◆ CSS ファイル一覧
+## ◆ フロントエンド構成（CSS / JS）
 
-| ファイル名         | 説明                                                 |
-| ------------------ | ---------------------------------------------------- |
-| common.css         | 全ページ共通のレイアウト・基本スタイル               |
-| components.css     | ボタン・カード・フォームなどの共通 UI コンポーネント |
-| sanitize.css       | ブラウザ差異を吸収するリセット CSS                   |
-| utility.css        | 余白などユーティリティクラス                         |
-| pages/auth.css     | 会員登録・ログイン画面の個別スタイル                 |
-| pages/email.css    | メール認証関連画面のスタイル                         |
-| pages/items.css    | 商品一覧・商品詳細ページのスタイル                   |
-| pages/purchase.css | 購入画面・住所変更画面のスタイル                     |
-
-## ◆ JavaScript ファイル一覧
-
-| ファイル名               | 説明                                                   |
-| ------------------------ | ------------------------------------------------------ |
-| address-sync.js          | 住所 UI の値を hidden フィールドへ同期する処理         |
-| flash.js                 | フラッシュメッセージの自動フェードアウトなどの表示制御 |
-| image-preview.js         | 出品時の画像プレビュー表示                             |
-| jump-scroll.js           | ページ内の特定位置へスムーズスクロールする処理         |
-| payment-method-select.js | 支払い方法の選択 UI 制御                               |
-| price-input-format.js    | 価格入力欄のフォーマット（カンマ付与など）             |
-| select-ui-control.js     | セレクトボックスの UI 制御                             |
+CSS・JavaScript は以下のようにページ単位と共通コンポーネントに分割されています。
+詳細は `public/css/` および `public/js/` ディレクトリを参照してください。
 
 # ◎ 🧩 主な機能一覧（仕様書 US001〜US009 に準拠）
 
@@ -649,11 +556,10 @@ src/
 
 # ◎ 💡 工夫した点
 
-- Fortify を用いた認証機能のカスタマイズ
+- Fortify を用いた認証機能のカスタマイズ （CustomVerifyEmail）
 - 商品画像の表示調整（object-fit: contain）
 - UI の統一感を意識した Blade 構成
 - 共通CSSの統合によるスタイル管理の最適化
-- 検索フォームの UI 改善 -「虫眼鏡アイコン」を採用
 
 # ◎ 📝 補完した仕様
 

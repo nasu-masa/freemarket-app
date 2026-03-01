@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Services\StripeService;
+use Illuminate\Support\Facades\URL;
 
 class ShippingAddressTest extends TestCase
 {
@@ -22,7 +23,7 @@ class ShippingAddressTest extends TestCase
 
         $this->actingAs($user);
 
-        $this->put(route('purchase.address.update', ['item_id' => $item->id]), [
+        $this->post(route('purchase.address.store', ['item_id' => $item->id]), [
             'postal_code' => '123-4567',
             'address'     => '東京都台東区テスト1-2-3',
             'building'    => 'コーポⅡ 101号室',
@@ -66,7 +67,7 @@ class ShippingAddressTest extends TestCase
         ])->assertRedirect("/purchase/{$item->id}");
 
         // Stripe 成功後のコールバック
-        $this->get(route('purchase.success', ['item_id' => $item->id]))
+        $this->get(URL::signedRoute('purchase.success', ['item_id' => $item->id]))
             ->assertStatus(302);
 
         // 購入レコード確認

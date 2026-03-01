@@ -12,27 +12,17 @@ class AddressController extends Controller
         // 商品と関連データを取得
         $item = Item::findOrFail($item_id);
 
-        // ユーザーの住所を取得
-        $address = auth()->user()->address;
+        $user = auth()->user();
+        $latestAddress = $user->latestAddress;
 
-        return view('purchase.address_edit', compact('item', 'address'));
+        return view('purchase.address_edit', compact('item', 'latestAddress'));
     }
 
-    public function updateAddress(AddressRequest $request, $item_id)
+    public function storeAddress(AddressRequest $request, $item_id)
     {
         $user = auth()->user();
 
-        // 住所が無ければ新規作成
-        if (!$user->address) {
-            $user->address()->create(
-                $request->only('postal_code', 'address', 'building')
-            );
-        } else {
-            // 住所があれば更新
-            $user->address->update(
-                $request->only('postal_code', 'address', 'building')
-            );
-        }
+        $user->addAddress($request->only('postal_code', 'address', 'building'));
 
         return redirect()->route('purchase.checkout', ['item_id' => $item_id]);
     }

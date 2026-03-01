@@ -36,13 +36,13 @@
             <hr class="l-divider">
 
             {{-- old値保持 --}}
-            <input type="hidden" id="old-payment" value="{{ old('payment') }}">
+            <input type="hidden" id="old-payment" value="{{ old('payment_method') }}">
 
             {{-- 支払い方法 --}}
-            <section class="c-section c-section--purchase">
+            <section class="c-section p-purchase__section">
                 <h3 class="c-section__title c-section__title--md">支払い方法</h3>
 
-                <div class="c-select c-select--purchase">
+                <div class="c-select p-purchase__select">
 
                     <input
                         type="checkbox"
@@ -78,8 +78,8 @@
                     </div>
 
                     {{-- 支払い方法エラー --}}
-                    <div class="p-error">
-                        <span class="p-error__text">
+                    <div class="c-error--xl">
+                        <span class="c-error__text">
                             @error('payment_method')
                             {{ $message }}
                             @enderror
@@ -92,12 +92,12 @@
             <hr class="l-divider">
 
             {{-- 配送先 --}}
-            <section class="c-section c-section--purchase">
+            <section class="c-section p-purchase__section">
 
                 <div class="p-purchase__section-container">
                     <h3 class="c-section__title c-section__title--md">配送先</h3>
 
-                    @if ($address)
+                    @if ($latestAddress)
                     <a
                         href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}"
                         class="p-purchase__address-edit">
@@ -110,16 +110,16 @@
 
                     {{-- 郵便番号 --}}
                     <p class="p-purchase__address-postal">
-                        〒{{ $address->postal_code ?? 'XXX-YYYY' }}
+                        〒{{ $latestAddress->postal_code ?? 'XXX-YYYY' }}
                     </p>
 
                     {{-- 住所表示 --}}
                     <p
                         class="p-purchase__address-detail"
                         id="address-ui"
-                        data-address="{{ $address->address ?? '' }}"
-                        data-building="{{ $address->building ?? '' }}">
-                        @if (!$address)
+                        data-address="{{ $latestAddress->address ?? '' }}"
+                        data-building="{{ $latestAddress->building ?? '' }}">
+                        @if (!$latestAddress)
                         <span class="u-text-muted">住所が未登録です</span><br>
                         <a
                             href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}"
@@ -127,8 +127,8 @@
                             住所登録はこちらから
                         </a>
                         @else
-                        {{ $address->address }}<br>
-                        {{ $address->building }}
+                        {{ $latestAddress->address }}<br>
+                        {{ $latestAddress->building }}
                         @endif
                     </p>
 
@@ -136,21 +136,21 @@
                     <input
                         type="hidden"
                         name="postal_code"
-                        value="{{ $address->postal_code ?? ''}}">
+                        value="{{ $latestAddress->postal_code ?? ''}}">
                     <input
                         type="hidden"
                         name="address"
                         id="address-hidden"
-                        value="{{ optional($address)->address ?? '' }}">
+                        value="{{ optional($latestAddress)->address ?? '' }}">
                     <input
                         type="hidden"
                         name="building"
                         id="building-hidden"
-                        value="{{ optional($address)->building ?? '' }}">
+                        value="{{ optional($latestAddress)->building ?? '' }}">
 
                     {{-- 住所エラー --}}
-                    <div class="p-error">
-                        <span class="p-error__text">
+                    <div class="c-error--xl">
+                        <span class="c-error__text">
                             @error('address')
                             {{ $message }}
                             @enderror
@@ -191,7 +191,7 @@
                 </tr>
             </table>
 
-            <div class="c-button__wrapper u-mt-64">
+            <div class="l-button-wrapper">
                 <button type="submit" class="c-button c-button--sm c-button--primary">
                     購入する
                 </button>

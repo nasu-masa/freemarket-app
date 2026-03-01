@@ -30,12 +30,13 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        $user = auth()->user()->load('address');
+        $user = auth()->user();
+        $latestAddress = $user->latestAddress;
 
-        return view('mypage.profile_edit', compact('user'));
+        return view('mypage.profile_edit', compact('user', 'latestAddress'));
     }
 
-    public function update(ProfileRequest $request)
+    public function store(ProfileRequest $request)
     {
         $user = auth()->user();
 
@@ -46,21 +47,12 @@ class ProfileController extends Controller
             $user->save();
         }
 
-        // 住所が未登録なら作成、あれば更新
-        if (!$user->address) {
-            $user->address()->create([
-                'postal_code' => $request->postal_code,
-                'address'     => $request->address,
-                'building'    => $request->building,
-                'type'        => 'home',
-            ]);
-        } else {
-            $user->address()->update([
-                'postal_code' => $request->postal_code,
-                'address'     => $request->address,
-                'building'    => $request->building,
-            ]);
-        }
+        // ユーザー名更新
+        $user->name = $request->name;
+        $user->save();
+
+        // 住所作成
+        $user->addAddress($request->only('postal_code', 'address', 'building'));
 
         return redirect()->route('items.index');
     }

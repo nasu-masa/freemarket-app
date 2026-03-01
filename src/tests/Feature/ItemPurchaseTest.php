@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Item;
 use App\Services\StripeService;
+use Illuminate\Support\Facades\URL;
 
 class ItemPurchaseTest extends TestCase
 {
@@ -27,10 +28,10 @@ class ItemPurchaseTest extends TestCase
         $this->app->instance(StripeService::class, $mock);
 
         $this->post(route('purchase.store', ['item_id' => $item->id]), [
-            'payment' => 'card',
+            'payment_method' => 'card',
         ]);
 
-        $this->get(route('purchase.success', ['item_id' => $item->id]));
+        $this->get(URL::signedRoute('purchase.success', ['item_id' => $item->id]));
     }
 
     /** 購入が完了すると商品が sold になる */

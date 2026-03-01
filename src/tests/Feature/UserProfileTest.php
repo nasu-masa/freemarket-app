@@ -15,7 +15,7 @@ class UserProfileTest extends TestCase
     public function test_profile_page_displays_user_information()
     {
         /** @var \App\Models\User $user */
-        $user = User::factory()->create([
+        $user = User::factory()->withAddress()->create([
             'name' => 'テスト太郎',
             'avatar_path' => 'test-avatar.png',
         ]);
@@ -33,6 +33,7 @@ class UserProfileTest extends TestCase
             ->count(2)
             ->create([
                 'user_id' => $user->id,
+                'address_id' => $user->latestAddress->id,
             ]);
 
         $this->actingAs($user);

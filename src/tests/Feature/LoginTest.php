@@ -57,7 +57,7 @@ class LoginTest extends TestCase
 
         $response = $this->from('/login')->post('/login', [
             'email'    => 'wrong@example.com',
-            'password' => 'wrongpassword',
+            'password' => 'wrong-password',
         ]);
 
         $response->assertRedirect('/login');
@@ -68,7 +68,6 @@ class LoginTest extends TestCase
     /** 正しい入力の場合はログインに成功する */
     public function test_login_success()
     {
-        /** @var \App\Models\User $user */
         $user = User::factory()->create([
             'email'    => 'test@example.com',
             'password' => Hash::make('password12345'),

@@ -11,7 +11,6 @@ class CommentController extends Controller
     {
         $user = $request->user();
 
-        // コメントを作成し保存
         Comment::create([
             'user_id' => $user->id,
             'item_id' => $item_id,

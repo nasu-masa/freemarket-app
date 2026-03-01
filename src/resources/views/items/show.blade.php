@@ -61,8 +61,8 @@
                 </div>
             </div>
 
-            <div class="c-button__wrapper">
-                <div class="c-button__wrapper">
+            <div class="l-button-wrapper">
+                <div class="l-button-wrapper">
 
                     {{-- 出品者自身 & 販売中 --}}
                     @if ($item->user_id === auth()->id() && $item->status === 'selling')
@@ -159,7 +159,7 @@
                     name="content"
                     class="p-item-detail__comment-input"></textarea>
 
-                <div class="p-error">
+                <div class="c-error--lg">
                     @error('content')
                     <span class="c-error__text">
                         {{ $message }}
@@ -167,7 +167,7 @@
                     @enderror
                 </div>
 
-                <div class="c-button__wrapper">
+                <div class="l-button-wrapper">
                     @auth
                     <button type="submit"
                         class="

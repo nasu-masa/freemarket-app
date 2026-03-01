@@ -9,7 +9,7 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** 名前が未入力の場合はエラーになる */
+    /** 名前が未入力の場合はバリデーションエラーになる */
     public function test_name_empty()
     {
         $this->from('/register')->post('/register', [
@@ -22,7 +22,7 @@ class RegisterTest extends TestCase
         $this->get('/register')->assertSee('お名前を入力してください');
     }
 
-    /** メールアドレスが未入力の場合はエラーになる */
+    /** メールアドレスが未入力の場合はバリデーションエラーになる */
     public function test_email_empty()
     {
         $this->from('/register')->post('/register', [
@@ -35,7 +35,7 @@ class RegisterTest extends TestCase
         $this->get('/register')->assertSee('メールアドレスを入力してください');
     }
 
-    /** パスワードが未入力の場合はエラーになる */
+    /** パスワードが未入力の場合はバリデーションエラーになる */
     public function test_password_empty()
     {
         $this->from('/register')->post('/register', [
@@ -48,7 +48,7 @@ class RegisterTest extends TestCase
         $this->get('/register')->assertSee('パスワードを入力してください');
     }
 
-    /** パスワードが7文字以下の場合はエラーになる */
+    /** パスワードが7文字以下の場合はバリデーションエラーになる */
     public function test_password_7_characters_or_less()
     {
         $this->from('/register')->post('/register', [
@@ -61,7 +61,7 @@ class RegisterTest extends TestCase
         $this->get('/register')->assertSee('パスワードは8文字以上で入力してください');
     }
 
-    /** パスワード確認が一致しない場合はエラーになる */
+    /** パスワード確認が一致しない場合はバリデーションエラーになる */
     public function test_password_confirmation_no_match()
     {
         $this->from('/register')->post('/register', [

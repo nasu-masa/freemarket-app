@@ -15,7 +15,7 @@ class AddressSeeder extends Seeder
         $users = User::all();
 
         foreach ($users as $user) {
-            $user->address()->create([
+            $user->addresses()->create([
                 'user_id'     => $user->id,
                 'postal_code' => $faker->postcode(),
                 'address'     => $faker->prefecture()

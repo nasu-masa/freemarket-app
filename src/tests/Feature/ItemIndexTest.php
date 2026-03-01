@@ -26,7 +26,7 @@ class ItemIndexTest extends TestCase
         }
     }
 
-    /** sold 商品には sold クラスが付与される */
+    /** sold 商品には soldラベルが付与される */
     public function test_sold_items_have_sold_class()
     {
         $item = Item::factory()->create([
@@ -40,7 +40,7 @@ class ItemIndexTest extends TestCase
         $response->assertSee($image->image_path);
     }
 
-    /** 自分が出品した商品はおすすめタブに表示されない */
+    /** 自分が出品した商品はタブに表示されない */
     public function test_own_items_are_not_displayed()
     {
         /** @var \App\Models\User $user */

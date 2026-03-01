@@ -23,8 +23,8 @@ class PurchaseRequest extends FormRequest
     public function messages()
     {
         return [
-            'payment_method.required' => '支払い方法を選択してください',
-            'address.required' => '配送先住所が必要です',
+            'payment_method.required' => 'お支払い方法を選択してください。',
+            'address.required' => '配送先住所が必要です。',
         ];
     }
 }

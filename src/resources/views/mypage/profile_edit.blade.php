@@ -5,9 +5,8 @@
 <div class="c-card">
     <h2 class="c-card__title u-mt-48 u-mb-48">プロフィール設定</h2>
 
-    <form action="{{ route('mypage.profile.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('mypage.profile.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
 
         <!-- プロフィール画像 -->
         <div class="c-input u-flex u-mb-32">
@@ -56,7 +55,7 @@
             <label class="c-input__label">郵便番号</label>
             <input type="text"
                 name="postal_code"
-                value="{{ old('postal_code', $user->address->postal_code ?? '') }}"
+                value="{{ old('postal_code', $latestAddress->postal_code ?? '') }}"
                 class="c-input__field c-input--md">
 
             <div class="c-error">
@@ -71,7 +70,7 @@
             <label class="c-input__label">住所</label>
             <input type="text"
                 name="address"
-                value="{{ old('address', ($user->address->address ?? '')) }}"
+                value="{{ old('address', $latestAddress->address ?? '') }}"
                 class="c-input__field c-input--md">
 
             <div class="c-error">
@@ -86,7 +85,7 @@
             <label class="c-input__label">建物名</label>
             <input type="text"
                 name="building"
-                value="{{ old('building', $user->address->building ?? '') }}"
+                value="{{ old('building', $latestAddress->building ?? '') }}"
                 class="c-input__field c-input--md">
 
             <div class="c-error">
@@ -97,7 +96,7 @@
         </div>
 
 
-        <div class="c-button__wrapper u-mt-32">
+        <div class="l-button-wrapper u-mt-32">
             <button type="submit"
                 class="c-button c-button--md c-button--primary">
                 登録する
@@ -109,5 +108,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/image-preview.js') }}"></script>
+<script src="{{ asset('js/image-preview.js') }}"></script>
 @endsection

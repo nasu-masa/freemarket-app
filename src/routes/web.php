@@ -66,15 +66,16 @@ Route::middleware('auth')->group(function () {
         ->name('purchase.store');
 
     Route::get('/success/{item_id}', [PurchaseController::class, 'success'])
-        ->name('purchase.success');
+        ->name('purchase.success')
+        ->middleware('signed');
     Route::get('/cancel/{item_id}', [PurchaseController::class, 'cancel'])
         ->name('purchase.cancel');
 
     // 住所変更ページ
     Route::get('/purchase/address/{item_id}', [AddressController::class, 'editAddress'])
         ->name('purchase.address.edit');
-    Route::put('/purchase/address/{item_id}', [AddressController::class, 'updateAddress'])
-        ->name('purchase.address.update');
+    Route::post('/purchase/address/{item_id}', [AddressController::class, 'storeAddress'])
+        ->name('purchase.address.store');
 
 
     // 商品出品画面
@@ -101,9 +102,15 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])
         ->name('mypage.profile.edit');
 
-    Route::put('/mypage/profile', [ProfileController::class, 'update'])
-        ->name('mypage.profile.update');
+    Route::post('/mypage/profile', [ProfileController::class, 'store'])
+        ->name('mypage.profile.store');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Verification Email
+|--------------------------------------------------------------------------
+*/
 
 // 誘導画面（ログイン後の未認証チェック
 Route::get('/email/verify', function () {
@@ -120,6 +127,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::post('/email/resend', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return redirect()
-            ->route('verification.notice')
-            ->with('success', '認証メールを再送しました');
+        ->route('verification.notice')
+        ->with('success', '認証メールを再送しました');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');

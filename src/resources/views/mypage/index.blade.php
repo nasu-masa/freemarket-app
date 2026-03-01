@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="c-page-header">
+<div class="l-container">
 
     <div class="c-profile">
         <div class="c-profile__left">

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('css/utility.css') }}">
     @yield('css')
-    <title>フリマアプリ</title>
+    <title>coachtechフリマ</title>
 </head>
 
 <body class="l-body">

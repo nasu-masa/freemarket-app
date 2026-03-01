@@ -7,7 +7,7 @@
 @section('content')
 
 {{-- タブ --}}
-<div class="c-page-header">
+<div class="l-container">
 
     <div class="c-tabs u-mt-48">
         <a href="/?tab=recommend&keyword={{ $keyword }}"
