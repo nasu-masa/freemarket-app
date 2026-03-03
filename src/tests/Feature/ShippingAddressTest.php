@@ -51,24 +51,7 @@ class ShippingAddressTest extends TestCase
     {
         [$user, $item] = $this->prepareUserWithAddress();
 
-        $this->get(route('purchase.checkout', ['item_id' => $item->id]));
-
-        // Stripe モック
-        $mock = \Mockery::mock(StripeService::class);
-        $mock->shouldReceive('createCheckoutSession')
-            ->andReturn((object)[
-                'id'  => 'cs_test_123',
-            ]);
-        $this->app->instance(StripeService::class, $mock);
-
-        // 購入処理（Stripe へリダイレクト）
-        $this->post(route('purchase.store', ['item_id' => $item->id]), [
-            'payment' => 'card',
-        ])->assertRedirect("/purchase/{$item->id}");
-
-        // Stripe 成功後のコールバック
-        $this->get(URL::signedRoute('purchase.success', ['item_id' => $item->id]))
-            ->assertStatus(302);
+        $user->purchaseItem($item, 'card');
 
         // 購入レコード確認
         $purchase = Purchase::where('user_id', $user->id)

@@ -130,19 +130,19 @@ class ItemSeeder extends Seeder
                 'condition'   => $data['condition'],
                 'status'      => $data['status'],
             ]);
+
+            $item->categories()->attach($data['categories']);
+
+            $source = public_path('products/' . $data['image']);
+            $filename = 'items/' . Str::random(20) . '.jpg';
+
+            Storage::disk('public')->put($filename, File::get($source));
+
+            ItemImage::create([
+                'item_id' => $item->id,
+                'image_path' => $filename,
+            ]);
         }
-
-        $item->categories()->attach($data['categories']);
-
-        $source = public_path('products/' . $data['image']);
-        $filename = 'items/' . Str::random(20) . '.jpg';
-
-        Storage::disk('public')->put($filename, File::get($source));
-
-        ItemImage::create([
-            'item_id' => $item->id,
-            'image_path' => $filename,
-        ]);
     }
 }
 

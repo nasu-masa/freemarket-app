@@ -41,7 +41,8 @@ class PurchaseController extends Controller
 
         // カード決済
         if ($payment_method === 'card') {
-            return $this->payByCard($item, app(StripeService::class));
+            $userId = auth()->id();
+            return $this->payByCard($item, app(StripeService::class), $userId);
         }
 
         return redirect()
@@ -58,23 +59,19 @@ class PurchaseController extends Controller
             ->with('success', '購入手続きが完了しました');
     }
 
-    private function payByCard($item, StripeService $stripeService)
+    private function payByCard($item, StripeService $stripeService, $userId)
     {
         // Stripe セッション作成
-        $session = $stripeService->createCheckoutSession($item);
+        $session = $stripeService->createCheckoutSession($item, $userId);
 
         return redirect($session->url);
     }
 
-    public function success(Request $request, $item_id)
+    public function success(Request $request)
     {
         if (! $request->hasValidSignature()) {
             abort(403, '無効なアクセスです');
         }
-
-        $item = Item::findOrFail($item_id);
-
-        auth()->user()->purchaseItem($item, 'convenience');
 
         return redirect()
             ->route('items.index')

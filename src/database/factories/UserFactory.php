@@ -33,6 +33,8 @@ class UserFactory extends Factory
     /** * 住所を持つユーザーを作る */
     public function withAddress()
     {
-        return $this->has(Address::factory());
+        return $this->has(Address::factory()->state([
+                'created_at' => now(),
+        ]));
     }
 }

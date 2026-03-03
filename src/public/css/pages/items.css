@@ -30,11 +30,8 @@
     background: #000;
 }
 
-.p-item-detail__image {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: contain;
+.p-item-detail__no-image {
+    font-size: 32px;
 }
 
 .p-item-detail__image-card.is-sold::after {

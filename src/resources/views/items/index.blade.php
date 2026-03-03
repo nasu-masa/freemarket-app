@@ -32,9 +32,16 @@
             class="c-product-card__link">
             <div class="c-product-card__image-wrapper
                 {{ $item->status === 'sold' ? 'is-sold' : '' }}">
+                @if ($item->images->isNotEmpty())
                 <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
                     alt="商品画像"
                     class="c-product-card__image">
+                @else
+                <div class="c-product-card__no-image">
+                    商品画像
+                </div>
+                @endif
+
             </div>
 
             <p class="c-product-card__name">{{ $item->name }}</p>

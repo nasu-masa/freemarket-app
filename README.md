@@ -212,6 +212,7 @@ src/
 │       └── emails/
 │
 ├── routes/
+│   ├── api.php
 │   └── web.php
 │
 └── tests/
@@ -219,6 +220,23 @@ src/
 ```
 
 ## ◆ ルート 一覧 (Route)
+
+# api.php
+
+---
+
+■ 画面名称（API 名称）：Stripe Webhook 決済完了通知処理
+
+- パス：/stripe/webhook
+- メソッド：POST
+- コントローラー：StripeWebhookController
+- アクション：handle
+- 認証必須：不要（Stripe が外部から送信するため）
+- 説明：Stripe から送信される Webhook イベントを受信し、決済完了時に購入処理を実行する
+
+---
+
+# web.php
 
 ---
 
@@ -453,37 +471,38 @@ src/
 
 ---
 
-## ◆　コントローラー 一覧（Controller）
+## ◆ コントローラー 一覧（Controller）
 
-| コントローラーファイル名 | 説明                                                         |
-| ------------------------ | ------------------------------------------------------------ |
-| ItemController.php       | 商品一覧・詳細・出品フォーム・出品処理を管理                 |
-| MyListItemController.php | マイリスト（お気に入り）追加を管理                           |
-| CommentController.php    | 商品へのコメント投稿を管理                                   |
-| PurchaseController.php   | 購入確認画面・購入処理を管理                                 |
-| AddressController.php    | 購入時の住所変更画面・住所更新処理を管理                     |
-| ProfileController.php    | マイページ、購入履歴・出品履歴、プロフィール編集・更新を管理 |
-| RegisterController.php   | 会員登録フォーム表示（処理は Fortify が担当）                |
-| LoginController.php      | ログインフォーム表示（処理は Fortify が担当）                |
+| コントローラーファイル名 | 説明                                                                |
+| --------------------------- | ------------------------------------------------------------   |
+| ItemController.php          | 商品一覧・詳細・出品フォーム・出品処理を管理                       |
+| MyListItemController.php    | マイリスト（お気に入り）追加を管理                                |
+| CommentController.php       | 商品へのコメント投稿を管理                                        |
+| PurchaseController.php      | 購入確認画面・購入処理を管理                                      |
+| AddressController.php       | 購入時の住所変更画面・住所更新処理を管理                           |
+| ProfileController.php       | マイページ、購入履歴・出品履歴、プロフィール編集・更新を管理         |
+| RegisterController.php      | 会員登録フォーム表示（処理は Fortify が担当）                      |
+| LoginController.php         | ログインフォーム表示（処理は Fortify が担当）                      |
+| StripeWebhookController.php | Stripe の Webhook を処理し、決済完了時にアプリ側の購入処理を実行する|
 
 ## ◆ モデル 一覧（Model）
 
-| モデルファイル名 | 説明                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------ |
-| User.php         | ユーザー情報を管理                                                                   |
-| Address.php      | ユーザーの住所情報（郵便番号・都道府県・市区町村・番地・建物名）を管理               |
-| Category.php     | 商品カテゴリを管理                                                                   |
-| Comment.php      | 商品へのコメントを管理                                                               |
-| Item.php         | 出品された商品データ（タイトル・説明・価格・カテゴリ・ブランド・状態・出品者）を管理 |
-| ItemImage.php    | 商品画像を管理                                                                       |
-| MyListItem.php   | ユーザーのお気に入り（マイリスト）を管理                                             |
-| Purchase.php     | 購入情報（購入者・商品・購入日時・金額）を管理                                       |
+| モデルファイル名 | 説明                                                                               |
+| ---------------- | -------------------------------------------------------------------------------- |
+| User.php         | ユーザー情報を管理                                                                 |
+| Address.php      | ユーザーの住所情報（郵便番号・都道府県・市区町村・番地・建物名）を管理                  |
+| Category.php     | 商品カテゴリを管理                                                                 |
+| Comment.php      | 商品へのコメントを管理                                                              |
+| Item.php         | 出品された商品データ（タイトル・説明・価格・カテゴリ・ブランド・状態・出品者）を管理      |
+| ItemImage.php    | 商品画像を管理                                                                     |
+| MyListItem.php   | ユーザーのお気に入り（マイリスト）を管理                                              |
+| Purchase.php     | 購入情報（購入者・商品・購入日時・金額）を管理                                         |
 
 ## ◆ ビュー 一覧（Bladeファイル）
 
 | 画面名称                         | Bladeファイル名                 |
 | -------------------------------- | ------------------------------- |
-| 商品一覧画面（トップ画面）       | items/index.blade.php           |
+| 商品一覧画面（トップ画面）        | items/index.blade.php           |
 | 会員登録画面                     | auth/register.blade.php         |
 | ログイン画面                     | auth/login.blade.php            |
 | 商品詳細画面                     | items/show.blade.php            |
@@ -491,7 +510,7 @@ src/
 | 送付先住所変更画面               | purchase/address_edit.blade.php |
 | 商品出品画面                     | items/create.blade.php          |
 | プロフィール画面                 | mypage/index.blade.php          |
-| プロフィール編集画面（設定画面） | mypage/profile_edit.blade.php   |
+| プロフィール編集画面（設定画面）  | mypage/profile_edit.blade.php   |
 | メール認証誘導画面               | auth/verify_email.blade.php     |
 
 ## ◆ フロントエンド構成（CSS / JS）

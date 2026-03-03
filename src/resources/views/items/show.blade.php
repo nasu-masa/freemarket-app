@@ -11,9 +11,15 @@
     <div class="p-item-detail__image-container">
 
         <div class="p-item-detail__image-card {{ $item->status === 'sold' ? 'is-sold' : '' }}">
+            @if ($item->images->isNotEmpty())
             <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
                 alt="商品画像"
-                class="p-item-detail__image">
+                class="c-product-card__image">
+            @else
+            <div class="c-product-card__no-image p-item-detail__no-image">
+                商品画像
+            </div>
+            @endif
         </div>
 
     </div>
