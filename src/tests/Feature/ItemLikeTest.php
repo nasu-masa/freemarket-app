@@ -67,7 +67,7 @@ class ItemLikeTest extends TestCase
 
         $this->actingAs($user);
 
-        $this->post(route('item.unlike', ['item_id' => $item->id]));
+        $this->post(route('item.like', ['item_id' => $item->id]));
 
         // DB 削除
         $this->assertDatabaseMissing('my_list_items', [

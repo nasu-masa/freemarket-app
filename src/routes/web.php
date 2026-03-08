@@ -51,9 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/item/{item_id}/like', [MyListItemController::class, 'store'])
         ->name('item.like');
 
-    Route::post('/item/{item_id}/unlike', [MyListItemController::class, 'destroy'])
-        ->name('item.unlike');
-
     Route::post('/item/{item_id}/comments', [CommentController::class, 'store'])
         ->name('item.comments.store');
 

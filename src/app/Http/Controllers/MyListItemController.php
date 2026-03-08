@@ -9,6 +9,10 @@ class MyListItemController extends Controller
 {
     public function store(Request $request, $item_id)
     {
+        if(!auth()->check()) {
+            return response()->json(['message' => 'Unauthenticated'], 401);
+        }
+
         $user = $request->user();
 
         // すでにいいねしているか確認
@@ -16,31 +20,24 @@ class MyListItemController extends Controller
             ->where('item_id', $item_id)
             ->first();
 
-        if (!$existing) {
-            // いいねを作成
-            MyListItem::create([
-                'user_id' => $user->id,
-                'item_id' => $item_id,
+        if ($existing) {
+            //いいね解除 (unlike)
+            $existing->delete();
+
+            return response()->json([
+                'isLiked' => false,
+                'likeCount' => MyListItem::where('item_id', $item_id)->count(),
             ]);
         }
 
-        return redirect()->back();
-    }
+        MyListItem::create([
+            'user_id' => $user->id,
+            'item_id' => $item_id,
+        ]);
 
-    public function destroy(Request $request, $item_id)
-    {
-        $user = $request->user();
-
-        // いいねを検索
-        $existing = MyListItem::where('user_id', $user->id)
-            ->where('item_id', $item_id)
-            ->first();
-
-        if ($existing) {
-            // いいねを削除
-            $existing->delete();
-        }
-
-        return redirect()->back();
+        return response()->json([
+            'isLiked' => true,
+            'likeCount' => MyListItem::where('item_id', $item_id)->count(),
+        ]);
     }
 }

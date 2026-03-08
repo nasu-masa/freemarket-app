@@ -104,9 +104,15 @@ composer require stripe/stripe-php
 ### ◆ Stripe の環境変数（.env）
 
 ```bash
-STRIPE_KEY = your_stripe_public_key;
-STRIPE_SECRET = your_stripe_secret_key;
+# Stripe
+STRIPE_KEY=pk_test_1234567890abcdef
+STRIPE_SECRET=sk_test_1234567890abcdef
 ```
+
+※ 本アプリでは Stripe の「テスト用のkey（pk_test / sk_test）」を使用しています。
+  Feature テストでは StripeService をモックしているため、Stripe API は実際には呼ばれません。
+
+
 
 ## ◆ 開発環境 URL
 
@@ -119,7 +125,7 @@ STRIPE_SECRET = your_stripe_secret_key;
 
 # ◎ 🗂 テーブル仕様書 & ER図
 
-本アプリケーションは、coachtech が提示する仕様書（US001〜US009）に基づき
+本アプリケーションは、仕様書（US001〜US009）に基づき
 データベース設計を行っています。
 
 以下に **ER図** と **テーブル仕様書** を掲載します。
@@ -138,8 +144,8 @@ ER図では以下のエンティティを定義しています：
 - categories
 - category_item（中間テーブル）
 - comments
-- purchases
 - addresses
+- purchases
 - my_list_items
 
 ---
@@ -152,10 +158,10 @@ ER図では以下のエンティティを定義しています：
 
 - カラム名
 - データ型
+- 主キー
+- ユニークキー
 - NULL 許可
-- デフォルト値
 - 外部キー制約
-- カーディナリティ（1対多、多対多 など）
 
 本アプリのマイグレーションファイルは、
 

@@ -43,18 +43,15 @@
 
             <div class="p-item-detail__actions">
                 <div class="p-item-detail__like">
-                    <form action="{{ $isLiked
-                            ? route('item.unlike', ['item_id' => $item->id])
-                            : route('item.like', ['item_id' => $item->id])
-                        }}"
-                        method="post" class="p-item-detail__like-form">
-                        @csrf
-                        <button type="submit"
-                            class="p-item-detail__icon-button p-item-detail__like-button {{ $isLiked ? 'is-liked' : '' }}">
+                    <div class="p-item-detail__like-form">
+                        <button
+                            class="p-item-detail__icon-button p-item-detail__like-button {{ $isLiked ? 'is-liked' : '' }}"
+                            data-id="{{ $item->id }}"
+                            data-liked="{{ $isLiked ? '1' : '0' }}">
                         </button>
 
                         <span class="p-item-detail__count">{{ $likeCount }}</span>
-                    </form>
+                    </div>
                 </div>
 
                 <div class=" p-item-detail__stock">
@@ -202,4 +199,5 @@
 
 @section('scripts')
 <script src="{{ asset('js/jump-scroll.js') }}"></script>
+<script src="{{ asset('js/my-list-update.js') }}"></script>
 @endsection
